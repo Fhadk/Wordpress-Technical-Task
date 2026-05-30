@@ -1,0 +1,12 @@
+/* Book Manager Plugin Styles */
+/* TODO: Add your CSS here */
+
+.book-list {
+    list-style: none;
+    padding: 0;
+}
+
+.book-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
