@@ -1,7 +1,6 @@
 ## Submission Details
 
 **Candidate Name:** 
-**Date:** 
 **Total Time Spent:** hours
 
 ##  Feature Checklist
@@ -14,7 +13,7 @@
 - [ ] No PHP notices or warnings
 - [ ] Plugin activates without errors
 
-## ⏱️ Git Integrity
+##  Git Integrity
 
 - [ ] START commit present
 - [ ] END commit present  
@@ -34,6 +33,6 @@
 
 [Any additional context, challenges faced, or bonus features]
 
-## 🔗 Live Demo (Optional)
+##  Live Demo (Optional)
 
 [If you deployed somewhere, add URL here]
