@@ -1,24 +1,24 @@
 ## Submission Details
 
-**Candidate Name:** 
-**Total Time Spent:** hours
+**Kashif Hussain** 
+**Total Time Spent:** 2:40 hours
 
 ##  Feature Checklist
 
-- [ ] Custom Post Type "Book" works
-- [ ] Author field saves/loads correctly
-- [ ] Year field saves/loads correctly  
-- [ ] Shortcode `[book_list]` displays books
-- [ ] AJAX button shows alert on book page
-- [ ] No PHP notices or warnings
-- [ ] Plugin activates without errors
+- [x] Custom Post Type "Book" works
+- [x] Author field saves/loads correctly
+- [x] Year field saves/loads correctly  
+- [x] Shortcode `[book_list]` displays books
+- [x] AJAX button shows alert on book page
+- [x] No PHP notices or warnings
+- [x] Plugin activates without errors
 
 ##  Git Integrity
 
-- [ ] START commit present
-- [ ] END commit present  
-- [ ] Multiple work commits (at least 3)
-- [ ] All commits before END time
+- [x] START commit present
+- [x] END commit present  
+- [x] Multiple work commits (at least 3)
+- [x] All commits before END time
 
 ##  Testing Instructions
 

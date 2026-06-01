@@ -42,5 +42,5 @@ Click the **Fork** button (top right of this page)
 
 ### Step 2: Clone your fork
 ```bash
-git clone https://github.com/YOUR_USERNAME/wordpress-book-manager-test.git
+git clone https://github.com/kashif2041/Wordpress-Technical-Task.git
 cd wordpress-book-manager-test
