@@ -75,7 +75,8 @@ function add_ajax_button() {
         <script>
         document.getElementById('requestInfoBtn').addEventListener('click', function() {
             var bookTitle = '<?php echo esc_js(get_the_title()); ?>';
-            alert('Thanks for your interest in ' + bookTitle);
+            //alert('Thanks for your interest in ' + bookTitle);
+            alert('Interested in ' + bookTitle);
         });
         </script>
         <?php
