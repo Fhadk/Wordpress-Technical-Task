@@ -48,55 +48,83 @@ require_once BOOK_MANAGER_PATH . 'includes/class-shortcode.php';
 // ============================================
 
 // ============================================
-// TODO 4: Add AJAX Button on Single Book Page
+// AJAX Button on Single Book Page
 // ============================================
-// HINT: Hook into wp_footer
-// HINT: Check is_singular('book')
-// HINT: Output button and JavaScript
 
+// Print the button in the footer of a single book page. The click is
+// handled over AJAX in assets/js/script.js.
 function add_ajax_button() {
-    // Only show on single book pages
     if (is_singular('book')) {
         ?>
-        <div style="margin: 20px 0; text-align: center;">
-            <button id="requestInfoBtn" style="
-                background-color: #0073aa;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 16px;
-            ">
+        <div class="book-request-info">
+            <button id="requestInfoBtn" type="button" class="book-request-btn">
                 📖 Request Info
             </button>
         </div>
-        
-        <script>
-        document.getElementById('requestInfoBtn').addEventListener('click', function() {
-            var bookTitle = '<?php echo esc_js(get_the_title()); ?>';
-            alert('Thanks for your interest in ' + bookTitle);
-        });
-        </script>
         <?php
     }
 }
+
 add_action('wp_footer', 'add_ajax_button');
 
+// Ajax Start here.
+
+function book_manager_request_info() {
+
+    check_ajax_referer('book_request_info', 'nonce');
+
+    $post_id = isset($_POST['book_id']) ? intval($_POST['book_id']) : 0;
+
+    if (!$post_id || get_post_type($post_id) !== 'book') {
+
+        wp_send_json_error('Invalid book.');
+    }
+
+    $title = get_the_title($post_id);
+
+    wp_send_json_success(array(
+        'message' => 'Title in ' . $title,
+    ));
+}
+add_action('wp_ajax_book_request_info', 'book_manager_request_info');
+add_action('wp_ajax_nopriv_book_request_info', 'book_manager_request_info');
+
 // ============================================
-// TODO 5: Enqueue Styles (Optional)
+// Enqueue Styles & Scripts
 // ============================================
 
-function enqueue_book_manager_styles() {
-    // Uncomment to use external CSS file
-    // wp_enqueue_style(
-    //     'book-manager-style',
-    //     BOOK_MANAGER_URL . 'assets/css/style.css',
-    //     array(),
-    //     BOOK_MANAGER_VERSION
-    // );
+function enqueue_book_manager_assets() {
+
+    wp_enqueue_style(
+        'book-manager-style',
+        BOOK_MANAGER_URL . 'assets/css/style.css',
+        array(),
+        BOOK_MANAGER_VERSION
+    );
+
+    if (!is_singular('book')) {
+        return;
+    }
+
+    wp_enqueue_script(
+        'book-manager-script',
+        BOOK_MANAGER_URL . 'assets/js/script.js',
+        array('jquery'),
+        BOOK_MANAGER_VERSION,
+        true
+    );
+
+    wp_localize_script(
+        'book-manager-script',
+        'bookManager',
+        array(
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('book_request_info'),
+            'bookId'  => get_the_ID()
+        )
+    );
 }
-add_action('wp_enqueue_scripts', 'enqueue_book_manager_styles');
+add_action('wp_enqueue_scripts', 'enqueue_book_manager_assets');
 
 // ============================================
 // Activation/Deactivation Hooks

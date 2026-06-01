@@ -11,10 +11,6 @@ class Book_CPT {
     }
     
     public function register_book_post_type() {
-        // TODO: Register 'book' post type
-        // Slug should be 'books'
-        // Supports: title, editor, thumbnail
-        
         $labels = array(
             'name'               => 'Books',
             'singular_name'      => 'Book',
@@ -27,15 +23,17 @@ class Book_CPT {
             'not_found'         => 'No books found',
             'not_found_in_trash'=> 'No books found in trash'
         );
-        
+
         $args = array(
-            'labels'    => $labels,
-            'public'    => true,
-            'has_archive' => true,
-            // TODO: Add more arguments
+            'labels'       => $labels,
+            'public'       => true,
+            'has_archive'  => true,
+            'rewrite'      => array('slug' => 'books'),
+            'supports'     => array('title', 'editor', 'thumbnail'),
+            
         );
-        
-        // register_post_type('book', $args);
+
+        register_post_type('book', $args);
     }
 }
 
