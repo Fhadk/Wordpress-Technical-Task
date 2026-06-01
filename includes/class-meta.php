@@ -31,6 +31,8 @@ class Book_Meta {
         $author = get_post_meta($post->ID, 'book_author', true);
         $year = get_post_meta($post->ID, 'book_year', true);
         
+        wp_nonce_field('book_meta_nonce', 'book_meta_nonce_field');
+        
         ?>
         <p>
             <label for="book_author">Author:</label>
@@ -44,18 +46,34 @@ class Book_Meta {
     }
     
     public function save_meta_data($post_id) {
-        // TODO: Save author and year
-        // TODO: Verify nonce
-        // TODO: Sanitize input
-        
-        if (isset($_POST['book_author'])) {
-            update_post_meta($post_id, 'book_author', sanitize_text_field($_POST['book_author']));
-        }
-        
-        if (isset($_POST['book_year'])) {
-            update_post_meta($post_id, 'book_year', intval($_POST['book_year']));
-        }
+
+    if (
+        !isset($_POST['book_meta_nonce_field']) ||
+        !wp_verify_nonce($_POST['book_meta_nonce_field'], 'book_meta_nonce')
+    ) {
+        return;
     }
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    if (isset($_POST['book_author'])) {
+        update_post_meta(
+            $post_id,
+            'book_author',
+            sanitize_text_field($_POST['book_author'])
+        );
+    }
+
+    if (isset($_POST['book_year'])) {
+        update_post_meta(
+            $post_id,
+            'book_year',
+            intval($_POST['book_year'])
+        );
+    }
+}
 }
 
 // Initialize

@@ -29,13 +29,23 @@ class Book_CPT {
         );
         
         $args = array(
-            'labels'    => $labels,
-            'public'    => true,
-            'has_archive' => true,
-            // TODO: Add more arguments
-        );
+    'labels' => $labels,
+    'public' => true,
+    'has_archive' => true,
+    'rewrite' => array(
+        'slug' => 'books'
+    ),
+    'supports' => array(
+        'title',
+        'editor',
+        'thumbnail'
+    ),
+    'show_in_rest' => true,
+    'menu_position' => 5,
+    'menu_icon' => 'dashicons-book'
+);
         
-        // register_post_type('book', $args);
+         register_post_type('book', $args);
     }
 }
 
