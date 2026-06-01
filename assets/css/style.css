@@ -1,12 +1,67 @@
 /* Book Manager Plugin Styles */
-/* TODO: Add your CSS here */
 
 .book-list {
     list-style: none;
     padding: 0;
+    margin: 1em 0;
 }
 
-.book-list li {
-    padding: 8px 0;
+.book-list__item {
+    padding: 10px 12px;
     border-bottom: 1px solid #eee;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.book-list__item:hover {
+    background-color: #f7f7f7;
+}
+
+.book-list__item a {
+    text-decoration: none;
+    color: #0073aa;
+    font-weight: 500;
+}
+
+.book-list__item a:hover {
+    text-decoration: underline;
+}
+
+.book-list-empty {
+    color: #666;
+    font-style: italic;
+}
+
+.book-manager-interest-wrap {
+    margin: 24px 0;
+    text-align: center;
+}
+
+.book-manager-interest-btn {
+    background-color: #0073aa;
+    color: #fff;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.book-manager-interest-btn:hover:not(:disabled) {
+    background-color: #005f8d;
+}
+
+.book-manager-interest-btn:disabled,
+.book-manager-interest-btn.is-loading {
+    background-color: #7a9bae;
+    cursor: not-allowed;
+}
+
+.book-manager-interest-status {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    min-height: 1.2em;
 }
